@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top 3 Animes</title>
+    <style>
+        body {
+            background-color: #7f3e16;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 95%;
+            height: 100%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-weight: bold;
+            color: #7f3e16;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        .left-column {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .chart-wrapper {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .right-column {
+            width: 45%;
+            margin-top: 10px;
+        }
+
+        table {
+            width: auto;
+            border-collapse: collapse;
+            font-size: 13px;
+            font-family: Helvetica, sans-serif;
+        }
+
+        th, td {
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #7f3e16;
+        }
+
+        th {
+            background-color: #f8ce96;
+        }
+
+        .description-block {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #333333;
+        }
+
+        .buttons-wrapper {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button-container.center-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container.back-button {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 40px;
+        }
+
+        .button {
+            background-color: white;
+            font-size: 16px;
+            font-weight: bold;
+            color: #7f3e16;
+            padding: 10px 20px;
+            border: 2px solid #7f3e16;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #ffffff;
+        }
+
+        .circle-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #7f3e16;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .circle-button:hover {
+            background-color: #5a2c10;
+        }
+
+        #recommendation {
+            margin-top: 10px;
+            color: #7f3e16;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Top 3 most popular Animes 2024</h1>
+
+        <div class="content-wrapper">
+
+            <div class="left-column">
+                <div class="table-wrapper">
+                    {{ table|safe }}
+                </div>
+                <div class="chart-wrapper">
+                    <img src="{{ chart_url }}" alt="Anime Ratings Chart">
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="description-block">
+                    <p><b>Attack on Titan</b></p>
+                    <p><i>Genre: Action, Drama, Fantasy</i></p>
+                    <p>In a world ravaged by towering man-eating Titans, humanity hides behind massive walls to survive. But when one of the walls is breached, a young boy named Eren Yeager vows to destroy every last Titan. What follows is a dark, intense journey full of war, secrets, and survival, where nothing is as it seems.</p>
+
+                    <p><b>Death Note</b></p>
+                    <p><i>Genre: Mystery, Psychological, Supernatural, Thriller</i></p>
+                    <p>When genius high schooler Light Yagami finds a mysterious notebook that can kill anyone whose name is written in it, he sets out to rid the world of criminals. But his actions attract the attention of a brilliant detective named L, sparking a tense battle of wits, morality, and identity.</p>
+
+                    <p><b>Fullmetal Alchemist: Brotherhood</b></p>
+                    <p><i>Genre: Action, Adventure, Drama, Fantasy</i></p>
+                    <p>After a failed attempt to bring their mother back to life using alchemy, brothers Edward and Alphonse Elric suffer devastating consequences. Determined to restore what they lost, they embark on a powerful journey filled with mystery, government corruption, and deep philosophical themes about life and humanity.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-wrapper">
+            <div class="button-container back-button">
+                <a href="/"><button class="button">Back</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

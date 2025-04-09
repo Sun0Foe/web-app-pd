@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <style>
+        body {
+            background-color: #7f3e16;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 95%;
+            height: 100%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-weight: bold;
+            color: #7f3e16;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+
+        .table-wrapper {
+            margin-right: 20px;
+        }
+
+        .chart-wrapper {
+            max-width: 600px;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        table {
+            width: auto;
+            border-collapse: collapse;
+            font-size: 13px;
+            font-family: Helvetica, sans-serif;
+        }
+
+        th, td {
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #7f3e16;
+        }
+
+        th {
+            background-color: #f8ce96;
+        }
+
+        .circle-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #7f3e16;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .circle-button:hover {
+            background-color: #5a2c10;
+        }
+
+        #recommendation {
+            margin-top: 10px;
+            color: #7f3e16;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .recommendation-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .next-button-container {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+        }
+
+        .button {
+            background-color: white;
+            font-size: 16px;
+            font-weight: bold;
+            color: #7f3e16;
+            padding: 10px 20px;
+            border: 2px solid #7f3e16;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #ffffff;
+        }
+
+        .bottom-left-paragraph {
+            position: absolute;
+            bottom: 20px;
+            left: 40px;
+            font-size: 15px;
+            font-family: Helvetica, sans-serif;
+            color: #7f3e16;
+            max-width: 250px;
+        }
+
+        .image-carousel {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            text-align: center;
+        }
+
+        .image-carousel img {
+            width: 250px;
+            height: auto;
+            border: 2px solid #7f3e16;
+            border-radius: 10px;
+        }
+
+        #nextImageBtn {
+            margin-top: 8px;
+            background-color: #7f3e16;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #nextImageBtn:hover {
+            background-color: #5a2c10;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Homepage</h1>
+        <div class="image-carousel">
+            <img id="animeImage" src="/static/images/attack_on_titan.jpg" alt="Anime Image" />
+            <button id="nextImageBtn">►</button>
+        </div>        
+        <div class="content-wrapper">
+            <div class="table-wrapper">
+                {{ table|safe }}
+            </div>
+
+            <div class="chart-wrapper">
+                <img src="{{ hist_url }}" alt="Rating Histogram" style="max-width: 100%;">
+            </div>
+        </div>
+
+        <div class="recommendation-wrapper">
+            <button class="circle-button" onclick="getRecommendation()">Recommend Me!</button>
+            <div id="recommendation"></div>
+        </div>
+
+        <div class="next-button-container">
+            <a href="/tab2"><button class="button">Next</button></a>
+        </div>
+        <div class="bottom-left-paragraph">
+            <p>Patrīcija Liepiņa 11.klase</p>
+        </div>
+        
+    </div>
+
+    <script>
+        function getRecommendation() {
+            fetch('/recommend')
+                .then(response => response.json())
+                .then(data => {
+                    const div = document.getElementById('recommendation');
+                    div.innerHTML = `<strong>${data.Title}</strong><br>Genre: ${data.Genre}<br>Episodes: ${data.Episodes}`;
+                });
+        }
+    </script>
+    <script>
+        const imageList = [
+            '/static/images/attack_on_titan.jpg',
+            '/static/images/death_note.jpg',
+            '/static/images/fullmetal_alchemist.jpg'
+        ];
+    
+        let currentImageIndex = 0;
+    
+        document.getElementById('nextImageBtn').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % imageList.length;
+            document.getElementById('animeImage').src = imageList[currentImageIndex];
+        });
+    </script>    
+</body>
+</html>
